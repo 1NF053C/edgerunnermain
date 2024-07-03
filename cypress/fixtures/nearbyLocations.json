@@ -1,0 +1,22 @@
+{
+    "results": [
+        {
+            "name": "Location A",
+            "geometry": {
+                "location": {
+                    "lat": 50,
+                    "lng": -55
+                }
+            }
+        },
+        {
+            "name": "Location B",
+            "geometry": {
+                "location": {
+                    "lat": 51,
+                    "lng": -55
+                }
+            }
+        }
+    ]
+}
