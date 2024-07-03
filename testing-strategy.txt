@@ -1,9 +1,0 @@
-Sure, here's a compressed summary of the Cypress testing strategy for your MapComponent:
-
-Behavioral Tests: Focus on end-to-end functionality of MapComponent.
-Rendering: Ensure correct display of markers, routes, and user interactions.
-Interactions: Simulate user actions (e.g., clicks) and verify expected behavior.
-Assertions: Verify markers, directions, and other UI elements are correctly displayed.
-Mocking: Use Cypress commands to mock API responses (e.g., Google Maps, Mapbox).
-Environment: Configure environment variables (REACT_APP_MAPPING_SERVICE) for service switching.
-This strategy ensures robust testing while maintaining flexibility to switch mapping services.
