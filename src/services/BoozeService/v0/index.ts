@@ -1,4 +1,4 @@
-import { PointOfInterest } from '@/utils/PointOfInterest';
+import { PointOfInterest } from '@/poi-service/src/models/PointOfInterest';
 import { createGoogleMapsBoozeService } from './drivers/GoogleMapsBoozeService'
 
 export interface BoozeService {

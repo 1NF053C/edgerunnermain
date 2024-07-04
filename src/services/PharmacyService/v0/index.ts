@@ -2,13 +2,13 @@ import { PointOfInterest } from "@/utils/PointOfInterest";
 import { createGoogleMapsPharmacyService } from "./drivers/GoogleMapsPharmacyService";
 
 export interface PharmacyService {
-    getPharmacyPois: () => PointOfInterest
+    getPharmacyPois: () => Promise<PointOfInterest>
 }
 
 export function createPharmacyService() {
     const PHARMACY_SERVICE = process.env.PHARMACY_SERVICE;
 
-    if(PHARMACY_SERVICE === 'google'){
+    if (PHARMACY_SERVICE === 'google') {
         return createGoogleMapsPharmacyService();
     }
     else {

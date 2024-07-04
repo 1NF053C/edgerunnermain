@@ -1,4 +1,4 @@
-import { PointOfInterest } from "@/utils/PointOfInterest";
+import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
 import { createGoogleMapsRunningService } from "./drivers/GoogleMapsRunningService";
 
 export interface RunningService {
