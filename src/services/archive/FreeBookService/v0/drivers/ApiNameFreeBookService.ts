@@ -1,4 +1,4 @@
-import { FreeBookService } from '@/services/FreeBookService/v0';
+import { FreeBookService } from '@/services/archive/FreeBookService/v0';
 
 export function createApiNameFreeBookService(): FreeBookService {
     const API_NAME_API_KEY = process.env.API_NAME_API_KEY;

@@ -1,4 +1,4 @@
-import { CafeService } from '@/services/CafeService/v0';
+import { CafeService } from '@/services/archive/CafeService/v0';
 
 export function createGoogleMapsCafeService(): CafeService {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;

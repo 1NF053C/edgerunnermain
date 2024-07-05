@@ -1,4 +1,4 @@
-import { BoozeService } from '@/services/BoozeService/v0'
+import { BoozeService } from '@/services/archive/BoozeService/v0'
 
 export function createGoogleMapsBoozeService(): BoozeService {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;

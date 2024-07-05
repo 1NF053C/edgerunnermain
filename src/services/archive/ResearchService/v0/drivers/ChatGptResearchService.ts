@@ -1,4 +1,4 @@
-import { ResearchService } from "@/services/ResearchService/v0";
+import { ResearchService } from "@/services/archive/ResearchService/v0";
 
 export function createChatGptResearchService(): ResearchService {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;

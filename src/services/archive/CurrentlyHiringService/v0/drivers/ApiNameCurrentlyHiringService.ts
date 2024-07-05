@@ -1,4 +1,4 @@
-import { CurrentlyHiringService } from '@/services/CurrentlyHiringService/v0';
+import { CurrentlyHiringService } from '@/services/archive/CurrentlyHiringService/v0';
 
 export function createApiNameCurrentlyHiringService(): CurrentlyHiringService {
     const API_NAME_API_KEY = process.env.API_NAME_API_KEY;

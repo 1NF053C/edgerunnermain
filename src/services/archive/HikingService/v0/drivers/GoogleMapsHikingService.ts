@@ -1,4 +1,4 @@
-import { HikingService } from '@/services/HikingService/v0';
+import { HikingService } from '@/services/archive/HikingService/v0';
 
 export function createGoogleMapsHikingService(): HikingService {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
