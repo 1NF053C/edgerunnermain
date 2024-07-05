@@ -1,8 +1,8 @@
-import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
+import { PointOfInterest } from '@/utils/PointOfInterest';
 import { createGoogleMapsFarmersMarketService } from "./drivers/GoogleMapsFarmersMarketService";
 
 export interface FarmersMarketService {
-    getFarmersMarketPois: () => PointOfInterest
+    getFarmersMarketPois: () => Promise<PointOfInterest[]>
 }
 
 export function createFarmersMarketService() {

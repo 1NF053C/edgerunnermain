@@ -2,7 +2,7 @@ import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
 import { createGoogleMapsCafeService } from "./drivers/GoogleMapsCafeService";
 
 export interface CafeService {
-    getCafePois: () => PointOfInterest
+    getCafePois: () => Promise<PointOfInterest[]>
 }
 
 export function createCafeService() {

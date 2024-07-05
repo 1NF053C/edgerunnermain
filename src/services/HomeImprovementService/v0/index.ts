@@ -1,12 +1,10 @@
-import { PointOfInterest } from '@/poi-service/src/models/PointOfInterest';
+import { PointOfInterest } from '@/utils/PointOfInterest';
 
 import { createGoogleMapsHomeImprovementService } from './drivers/GoogleMapsHomeImprovementService';
 
-type id = string;
-
 export interface HomeImprovementService {
-    getCarpentryPois: () => PointOfInterest[],
-    getPaintSupplyPois: () => PointOfInterest[]
+    getHardwareStorePois: () => Promise<PointOfInterest[]>,
+    getPaintSupplyStorePois: () => Promise<PointOfInterest[]>
 }
 
 export function createMappingService(): HomeImprovementService {

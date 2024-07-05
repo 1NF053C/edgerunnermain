@@ -2,7 +2,7 @@ import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
 import { createApiNameCurrentlyHiringService } from "./drivers/ApiNameCurrentlyHiringService";
 
 export interface CurrentlyHiringService {
-    getCurrentlyHiringPois: () => PointOfInterest
+    getCurrentlyHiringPois: () => Promise<PointOfInterest[]>
 }
 
 export function createCurrentlyHiringService() {

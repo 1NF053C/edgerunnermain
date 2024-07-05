@@ -2,7 +2,7 @@ import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
 import { createGoogleMapsGrillService } from "./drivers/GoogleMapsGrillService";
 
 export interface GrillService {
-    getGrillSupplyPois: () => PointOfInterest
+    getGrillSupplyPois: () => Promise<PointOfInterest[]>
 }
 
 export function createGrillService() {

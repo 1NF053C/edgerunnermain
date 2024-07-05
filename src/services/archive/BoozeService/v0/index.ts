@@ -1,8 +1,8 @@
-import { PointOfInterest } from '@/poi-service/src/models/PointOfInterest';
+import { PointOfInterest } from '@/utils/PointOfInterest';
 import { createGoogleMapsBoozeService } from './drivers/GoogleMapsBoozeService'
 
 export interface BoozeService {
-    getBoozePois: () => PointOfInterest[];
+    getBoozePois: () => Promise<PointOfInterest[]>;
 }
 
 export function createBusService(): BoozeService {

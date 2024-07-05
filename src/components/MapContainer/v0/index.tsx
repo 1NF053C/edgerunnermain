@@ -1,15 +1,34 @@
-//import { placeMarker } from './MappingService';
+"use client";
 
-export function MapContainer(){
-    // fetch data, handle Success, Loading, and Error states
-    const data = "Map data";
-    return <Map>{data}</Map>
+import { useEffect, useState } from "react";
+
+export function MapContainer() {
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        fetch('/api/default-pois')
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                setLoading(false);
+                throw error;
+            });
+    }, []);
+
+    if (data) return <Map data={data} />
+    else if (loading) return <div>loading...</div>
+    else return <div>error</div>
 }
 
 interface MapProps {
-    children?: React.ReactNode
+    data: any[]
 }
 
-export function Map(props: MapProps) {
-    return <div>MapComponent NYI</div>
+export function Map({ data }: MapProps) {
+    if (data.length === 0) return <div>empty map</div>
+    return <div>{data.map(item => <div>item</div>)}</div>
 }

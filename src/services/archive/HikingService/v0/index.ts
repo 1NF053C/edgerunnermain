@@ -1,9 +1,9 @@
-import { PointOfInterest } from '@/poi-service/src/models/PointOfInterest';
+import { PointOfInterest } from '@/utils/PointOfInterest';
 import { createGoogleMapsHikingService } from './drivers/GoogleMapsHikingService';
 
 export interface HikingService {
-    getHikingShoePois: () => PointOfInterest[];
-    getHikingTrailPois: () => PointOfInterest[];
+    getHikingShoePois: () => Promise<PointOfInterest[]>;
+    getHikingTrailPois: () => Promise<PointOfInterest[]>;
 }
 
 export function createHikingService(): HikingService {

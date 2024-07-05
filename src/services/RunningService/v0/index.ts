@@ -1,9 +1,8 @@
-import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
+import { PointOfInterest } from "@/utils/PointOfInterest";
 import { createGoogleMapsRunningService } from "./drivers/GoogleMapsRunningService";
 
 export interface RunningService {
-    getRunningShoePois: () => PointOfInterest[],
-    getGymWithTreadmillPois: () => PointOfInterest[]
+    getRunningShoePois: () => Promise<PointOfInterest[]>,
 }
 
 export function createRunningService(): RunningService {

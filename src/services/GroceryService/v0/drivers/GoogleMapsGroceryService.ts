@@ -1,13 +1,11 @@
-import { GroceryService } from '@/services/GroceryService/v0'
+import { GroceryService } from '@/services/GroceryService/v0';
+import { googleNearbySearch } from '@/utils/googleNearbySearch';
 
 export function createGoogleMapsGroceryService(): GroceryService {
-    const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
-    if (!GOOGLE_MAPS_API_KEY) {
-        throw TypeError("process.env.GOOGLE_MAPS_API_KEY is missing")
-    }
     return {
-        getGroceryPois() {
-            return []
+        async getGroceryPois() {
+            const results = await googleNearbySearch('groceries');
+            return results;
         }
     }
 }

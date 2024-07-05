@@ -1,9 +1,9 @@
-import { PointOfInterest } from '@/poi-service/src/models/PointOfInterest';
+import { PointOfInterest } from '@/utils/PointOfInterest';
 import { createGoogleMapsBikingService } from './drivers/GoogleMapsBikingService';
 
 export interface BikingService {
-    getBikeShopPois: () => PointOfInterest[];
-    getBikingTrailPois: () => PointOfInterest[];
+    getBikeShopPois: () => Promise<PointOfInterest[]>;
+    getBikingTrailPois: () => Promise<PointOfInterest[]>;
 }
 
 export function createBikingService(): BikingService {

@@ -2,7 +2,7 @@ import { PointOfInterest } from "@/utils/PointOfInterest";
 import { createGoogleMapsPharmacyService } from "./drivers/GoogleMapsPharmacyService";
 
 export interface PharmacyService {
-    getPharmacyPois: () => Promise<PointOfInterest>
+    getPharmacyPois: () => Promise<PointOfInterest[]>
 }
 
 export function createPharmacyService() {

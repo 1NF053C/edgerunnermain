@@ -1,13 +1,13 @@
-import { PointOfInterest } from '@/poi-service/src/models/PointOfInterest';
+import { PointOfInterest } from '@/utils/PointOfInterest';
 import { createGoogleMapsGroceryService } from './drivers/GoogleMapsGroceryService'
 
 export interface GroceryService {
-    getGroceryPois: () => PointOfInterest[];
+    getGroceryPois: () => Promise<PointOfInterest[]>;
 }
 
 export function createBusService(): GroceryService {
     const GROCERY_SERVICE = process.env.BOOZE_SERVICE;
-    
+
     if (GROCERY_SERVICE === 'google') {
         return createGoogleMapsGroceryService();
     }

@@ -2,7 +2,7 @@ import { PointOfInterest } from "@/poi-service/src/models/PointOfInterest";
 import { createApiNameFreeBookService } from "./drivers/ApiNameFreeBookService";
 
 export interface FreeBookService {
-    getFreeBookPois: () => PointOfInterest
+    getFreeBookPois: () => Promise<PointOfInterest[]>
 }
 
 export function createFreeBookService() {

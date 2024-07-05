@@ -1,19 +1,16 @@
 import { HomeImprovementService } from '@/services/HomeImprovementService/v0';
+import { googleNearbySearch } from '@/utils/googleNearbySearch';
 
 export function createGoogleMapsHomeImprovementService(): HomeImprovementService {
-    const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
-
-    if (!GOOGLE_MAPS_API_KEY) {
-        throw TypeError("process.env.GOOGLE_MAPS_API_KEY is missing")
-    }
-
     return {
-        getCarpentryPois() {
-            return []
+        async getHardwareStorePois() {
+            const results = await googleNearbySearch('hardware stores');
+            return results;
         },
 
-        getPaintSupplyPois() {
-            return []
+        async getPaintSupplyStorePois() {
+            const results = await googleNearbySearch('paint supply stores');
+            return results;
         }
     }
 }
