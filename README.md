@@ -2,8 +2,8 @@ Various mapping and location features
 
 TODO:
 
-[ ] Move services to serverside
+[x] Move running service serverside
 
-[ ] Implement a v1 service
+[x] Implement v1 running service
 
 [ ] 

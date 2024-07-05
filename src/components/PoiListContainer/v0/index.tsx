@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PoiList } from "./PoiList";
 
 export function PoiListContainer() {
     const [loading, setLoading] = useState(true);
@@ -22,17 +23,4 @@ export function PoiListContainer() {
     if (data) return <PoiList data={data} />
     else if (loading) return <div>loading...</div>
     else return <div>error</div>
-}
-
-interface PoiListProps {
-    data: any[]
-}
-
-export function PoiList({ data }: PoiListProps) {
-    if (data.length === 0) return <div>empty list</div>
-    return (
-        <ul>
-            {data.map((item, i) => <li key={i}>{JSON.stringify(item, null, 2)}</li>)}
-        </ul>
-    )
 }

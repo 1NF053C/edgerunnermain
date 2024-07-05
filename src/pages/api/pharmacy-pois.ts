@@ -5,7 +5,7 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
     try {
         const pharmacyService = createPharmacyService();
         const results = await pharmacyService.getPharmacyPois();
-        res.status(200).json(results.concat([4, 5, 6]));
+        res.status(200).json(results);
     } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
