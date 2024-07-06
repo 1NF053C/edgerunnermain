@@ -15,7 +15,7 @@ export function MapContainer() {
             .then((res) => res.json())
             .then((coords) => {
                 setCurrentLocation(coords);
-            })
+            });
 
         const fetchPois = () => fetch('/api/running-shoe-pois')
             .then((res) => res.json())

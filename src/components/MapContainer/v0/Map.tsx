@@ -34,25 +34,52 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
             const navControl = new mapboxgl.NavigationControl();
             mapRef.current.addControl(navControl, 'top-right'); // Adjust position as needed
 
-            mapRef.current.addSource('points', {
+            mapRef.current.addSource('startingCoords', {
                 type: 'geojson',
                 data: {
                     type: 'FeatureCollection',
-                    features: pois.map(poi => [
-                        {
-                            type: 'Feature',
-                            properties: {},
-                            geometry: {
-                                type: 'Point',
-                                coordinates: [poi.lng, poi.lat]
-                            }
-                        }
-                    ])
+                    features: [{
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [startingCoords.lng, startingCoords.lat]
+                        },
+                        id: String(startingCoords.lng) + String(startingCoords.lat)
+                    }]
                 }
             });
 
             mapRef.current.addLayer({
-                id: 'circle',
+                id: 'startingCoordsCircle',
+                type: 'circle',
+                source: 'startingCoords',
+                paint: {
+                    'circle-color': 'red',
+                    'circle-radius': 8,
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#ffffff'
+                }
+            });
+
+            mapRef.current.addSource('points', {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: pois.map(poi => ({
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [poi.lng, poi.lat]
+                        },
+                        id: String(poi.lng) + String(poi.lat)
+                    }))
+                }
+            });
+
+            mapRef.current.addLayer({
+                id: 'circles',
                 type: 'circle',
                 source: 'points',
                 paint: {
@@ -77,20 +104,21 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
                 mapRef.current.getCanvas().style.cursor = '';
             });
 
-            pois.forEach(poi => {
-                new mapboxgl.Marker()
-                    .setLngLat([poi.lng, poi.lat])
-                    .addTo(mapRef.current);
-            });
+            // pois.forEach(poi => {
+            //     new mapboxgl.Marker()
+            //         .setLngLat([poi.lng, poi.lat])
+            //         .addTo(mapRef.current);
+            // });
 
-            const currentLocationMarker = new mapboxgl.Marker()
-                .setLngLat([startingCoords.lng, startingCoords.lat])
-                .addTo(mapRef.current);
+            // const currentLocationMarker = new mapboxgl.Marker()
+            //     .setLngLat([startingCoords.lng, startingCoords.lat])
+            //     .addTo(mapRef.current);
 
-            const markerElement = currentLocationMarker.getElement();
-            if (markerElement) {
-                markerElement.style.background = 'red'; // Change color using CSS
-            }
+            // const markerElement = currentLocationMarker.getElement();
+            // if (markerElement) {
+            //     markerElement.style.background = 'red'; // Change color using CSS
+            // }
+
         })
 
     }, [mapRef.current])
