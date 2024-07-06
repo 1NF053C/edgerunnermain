@@ -8,7 +8,6 @@ export function MapContainer() {
     const [accessToken, setAccessToken] = useState();
     const [currentLocation, setCurrentLocation] = useState();
     const [pois, setPois] = useState<any[]>();
-
     const [data, setData] = useState<MapProps>();
 
     useEffect(() => {

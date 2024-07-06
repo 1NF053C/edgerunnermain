@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,6 +17,7 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
     const mapRef = useRef<any>();
 
     useEffect(() => {
+        if (mapRef.current) return;
         mapboxgl.accessToken = mapboxGlAccessToken;
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
@@ -26,16 +27,67 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
     }, []);
 
     useEffect(() => {
-        if (mapRef.current) {
+        if (!mapRef.current) return;
+        mapRef.current.on('load', function () {
+            mapRef.current.addSource('points', {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: pois.map(poi => [
+                        {
+                            type: 'Feature',
+                            properties: {},
+                            geometry: {
+                                type: 'Point',
+                                coordinates: [poi.lng, poi.lat]
+                            }
+                        }
+                    ])
+                }
+            });
+
+            mapRef.current.addLayer({
+                id: 'circle',
+                type: 'circle',
+                source: 'points',
+                paint: {
+                    'circle-color': '#4264fb',
+                    'circle-radius': 8,
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': '#ffffff'
+                }
+            });
+
+            mapRef.current.on('click', 'circle', (e: any) => {
+                mapRef.current.flyTo({
+                    center: e.features[0].geometry.coordinates
+                });
+            });
+
+            mapRef.current.on('mouseenter', 'circle', () => {
+                mapRef.current.getCanvas().style.cursor = 'pointer';
+            });
+
+            mapRef.current.on('mouseleave', 'circle', () => {
+                mapRef.current.getCanvas().style.cursor = '';
+            });
+
             pois.forEach(poi => {
                 new mapboxgl.Marker()
                     .setLngLat([poi.lng, poi.lat])
                     .addTo(mapRef.current);
             });
+
             new mapboxgl.Marker()
                 .setLngLat([startingCoords.lng, startingCoords.lat])
-                .addTo(mapRef.current)
-        }
+                .addTo(mapRef.current);
+        })
+
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.remove();
+            }
+        };
     }, [mapRef.current])
 
     return (
