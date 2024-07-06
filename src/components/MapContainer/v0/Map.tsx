@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './Map.css';
 
 export interface MapProps {
     startingCoords: {
@@ -61,6 +62,12 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
                     'circle-stroke-color': '#ffffff'
                 }
             });
+
+            const el = document.createElement('div');
+            el.className = 'pulsing-circle'
+            new mapboxgl.Marker(el)
+                .setLngLat([startingCoords.lng, startingCoords.lat])
+                .addTo(mapRef.current);
 
             mapRef.current.addSource('points', {
                 type: 'geojson',
