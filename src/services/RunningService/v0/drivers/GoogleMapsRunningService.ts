@@ -4,7 +4,7 @@ import { googleNearbySearch } from '@/utils/googleNearbySearch';
 export function createGoogleMapsRunningService(): RunningService {
     return {
         async getRunningShoePois() {
-            const results = await googleNearbySearch('running shoes');
+            const results = await googleNearbySearch('running shoe stores');
             return results;
         }
     }

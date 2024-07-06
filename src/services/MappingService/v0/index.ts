@@ -1,13 +1,16 @@
+"use client";
 import { PointOfInterest } from '@/utils/PointOfInterest';
 
 import { createGoogleMapsMappingService } from './drivers/GoogleMapsMappingService';
 import { createMapBoxMappingService } from './drivers/MapboxMappingService';
+import { Ref } from 'react';
+import { Marker } from 'mapbox-gl';
 
 type id = string;
 
 export interface MappingService {
     placeMarker: (lng: number, lat: number) => id;
-    removeMarker: (id: string) => void;
+    removeMarker: (id: id) => void;
     placeRoute: (a: PointOfInterest, b: PointOfInterest) => id;
     removeRoute: (id: string) => void;
 }

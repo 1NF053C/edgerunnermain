@@ -1,35 +1,43 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Coordinates, googleGeocode } from '@/utils/googleGeocode';
 
-interface MapProps {
-    data: any[]
+export interface MapProps {
+    startingCoords: {
+        lng: number,
+        lat: number
+    },
+    startingZoom: number,
+    mapboxGlAccessToken: string,
+    pois: any[]
 }
 
-export function Map({ data }: MapProps) {
+export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }: MapProps) {
     const mapContainerRef = useRef<any>();
     const mapRef = useRef<any>();
-    const [coords, setCoords] = useState<Coordinates>();
 
     useEffect(() => {
-        fetch('/api/current-location')
-            .then((res) => res.json())
-            .then((coords) => setCoords(coords))
-            .catch(err => console.log(err));
+        mapboxgl.accessToken = mapboxGlAccessToken;
+        mapRef.current = new mapboxgl.Map({
+            container: mapContainerRef.current,
+            center: [startingCoords.lng, startingCoords.lat],
+            zoom: startingZoom
+        });
     }, []);
 
     useEffect(() => {
-        if (coords) {
-            mapboxgl.accessToken = '';
-            mapRef.current = new mapboxgl.Map({
-                container: mapContainerRef.current,
-                center: [coords.lng, coords.lat], // starting position [lng, lat]
-                zoom: 9 // starting zoom
-            })
+        if (mapRef.current) {
+            pois.forEach(poi => {
+                console.log(poi)
+                new mapboxgl.Marker()
+                    .setLngLat([poi.lng, poi.lat])
+                    .addTo(mapRef.current);
+            });
+            new mapboxgl.Marker()
+                .setLngLat([startingCoords.lng, startingCoords.lat])
+                .addTo(mapRef.current)
         }
-    }, [coords]);
+    }, [mapRef.current])
 
     return (
         <div
