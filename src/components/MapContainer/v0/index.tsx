@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Map, MapProps } from './Map';
+import { useDataStore } from '@/utils/useDataStore';
 
 export function MapContainer() {
+    const currentLocationDataStore = useDataStore(() => fetch('/api/current-location'));
+
     const [loading, setLoading] = useState(true);
     const [accessToken, setAccessToken] = useState();
     const [currentLocation, setCurrentLocation] = useState();

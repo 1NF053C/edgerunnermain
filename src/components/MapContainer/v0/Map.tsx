@@ -138,3 +138,7 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
         />
     );
 }
+function fetchSomeData() {
+    throw new Error('Function not implemented.');
+}
+
