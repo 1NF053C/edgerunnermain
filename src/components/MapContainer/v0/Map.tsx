@@ -29,6 +29,11 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
     useEffect(() => {
         if (!mapRef.current) return;
         mapRef.current.on('load', function () {
+            if (mapRef.current.getSource('points')) return;
+
+            const navControl = new mapboxgl.NavigationControl();
+            mapRef.current.addControl(navControl, 'top-right'); // Adjust position as needed
+
             mapRef.current.addSource('points', {
                 type: 'geojson',
                 data: {
@@ -78,16 +83,16 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
                     .addTo(mapRef.current);
             });
 
-            new mapboxgl.Marker()
+            const currentLocationMarker = new mapboxgl.Marker()
                 .setLngLat([startingCoords.lng, startingCoords.lat])
                 .addTo(mapRef.current);
+
+            const markerElement = currentLocationMarker.getElement();
+            if (markerElement) {
+                markerElement.style.background = 'red'; // Change color using CSS
+            }
         })
 
-        return () => {
-            if (mapRef.current) {
-                mapRef.current.remove();
-            }
-        };
     }, [mapRef.current])
 
     return (
