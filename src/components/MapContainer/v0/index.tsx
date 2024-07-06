@@ -41,14 +41,16 @@ export function MapContainer() {
 
     useEffect(() => {
         if (!loading && accessToken && currentLocation && pois) {
+            // temp
+            const poisCoords = pois.map(poi => poi.geometry.location)
             setData({
                 mapboxGlAccessToken: accessToken,
                 startingCoords: currentLocation,
                 startingZoom: 14,
-                pois: pois
+                pois: poisCoords
             });
         }
-    }, [loading])
+    }, [loading]);
 
     if (data) return (
         <Map

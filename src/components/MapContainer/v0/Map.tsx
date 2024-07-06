@@ -28,7 +28,6 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
     useEffect(() => {
         if (mapRef.current) {
             pois.forEach(poi => {
-                console.log(poi)
                 new mapboxgl.Marker()
                     .setLngLat([poi.lng, poi.lat])
                     .addTo(mapRef.current);
