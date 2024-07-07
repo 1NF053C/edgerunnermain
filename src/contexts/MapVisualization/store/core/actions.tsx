@@ -24,7 +24,7 @@ export const useData = () => {
         } else if (locData && tokData) {
             commit('SET_DATA', {
                 id: "tbd",
-                startingZoom: createZoomLevel(10),
+                startingZoom: createZoomLevel(15),
                 currentCoordinates: locData,
                 publicToken: tokData
             });
