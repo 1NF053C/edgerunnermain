@@ -1,2 +1,3 @@
 export { useMapVisualizationState } from './core/state';
-export { useActions } from './core/actions';
+export { useData } from './core/actions';
+export { StateProvider } from './utils/StateProvider';

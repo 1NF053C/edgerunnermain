@@ -19,7 +19,7 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
     const mapRef = useRef<any>();
 
     useEffect(() => {
-        if (mapRef.current) return;
+        if (!mapRef.current) return; // temp
         mapboxgl.accessToken = mapboxGlAccessToken;
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
@@ -29,6 +29,7 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
     }, []);
 
     useEffect(() => {
+        mapRef.current = null; // temp
         if (!mapRef.current) return;
         mapRef.current.on('load', function () {
             if (mapRef.current.getSource('points')) return;

@@ -22,6 +22,7 @@ export const StateProvider: React.FC<StateProviderProps> = ({ children }) => {
 
   // Commit function
   const commit = (mutation: MutationType, payload: MutationPayloads[MutationType]) => {
+    console.log("[MUTATION]", mutation, "[PAYLOAD]", payload, "[NEW_STATE]", JSON.stringify(state, null, 2));
     setState((prevState) => mutations[mutation](prevState, payload as any));
   };
 
