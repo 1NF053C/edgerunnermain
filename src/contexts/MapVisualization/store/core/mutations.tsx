@@ -1,10 +1,10 @@
 import { Mutations } from '../utils/StateProvider';
-import { State } from './state';
+import { MapVisualizationState } from './state';
 
 export type MutationType = 'SET_DATA' | 'SET_LOADING' | 'APPEND_ERROR'
 
 export type MutationPayloads = {
-  SET_DATA: State['data'];
+  SET_DATA: MapVisualizationState['data'];
   SET_LOADING: boolean;
   APPEND_ERROR: any
 };
