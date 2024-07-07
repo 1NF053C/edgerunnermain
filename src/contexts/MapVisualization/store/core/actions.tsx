@@ -36,7 +36,6 @@ export const useData = () => {
             mutateRouteData();
 
             if (routeData && !routeLoading) {
-                console.log(routeData);
                 commit('SET_DATA', {
                     id: "tbd",
                     startingZoom: createZoomLevel(15),

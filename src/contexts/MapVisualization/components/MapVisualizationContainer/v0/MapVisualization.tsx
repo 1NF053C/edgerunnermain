@@ -25,6 +25,13 @@ function useMap({ data }: MapVisualizationProps) {
             center: [data.currentCoordinates.lng, data.currentCoordinates.lat],
             zoom: data.startingZoom
         });
+
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.remove();
+                mapRef.current = null;
+            }
+        };
     }, []);
 
     return { mapContainerRef, mapRef }
@@ -35,7 +42,8 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
 
     useEffect(() => {
         if (!mapRef.current) return;
-        mapRef.current.on('load', function () {
+
+        const addCurrentLocationAndPoiMarkersOnMapLoad = () => {
             if (mapRef.current.getSource('points')) return;
 
             const navControl = new mapboxgl.NavigationControl();
@@ -69,25 +77,27 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
                 }
             });
 
+            mapRef.current.on('mouseenter', 'startingCoordsCircle', () => {
+                mapRef.current.getCanvas().style.cursor = 'pointer';
+            });
+
+            mapRef.current.on('mouseleave', 'startingCoordsCircle', () => {
+                mapRef.current.getCanvas().style.cursor = '';
+            });
+
+            mapRef.current.on('click', 'startingCoordsCircle', () => {
+                mapRef.current.flyTo({
+                    center: [data.currentCoordinates.lng, data.currentCoordinates.lat]
+                });
+            });
+
             const el = document.createElement('div');
             el.className = 'pulsing-circle';
+
             new mapboxgl.Marker(el)
                 .setLngLat([data.currentCoordinates.lng, data.currentCoordinates.lat])
                 .addTo(mapRef.current);
 
-            el.onclick = (e: any) => {
-                mapRef.current.flyTo({
-                    center: [data.currentCoordinates.lng, data.currentCoordinates.lat]
-                });
-            }
-
-            el.onmouseover = (e: any) => {
-                mapRef.current.getCanvas().style.cursor = 'pointer';
-            };
-
-            el.onmouseout = (e: any) => {
-                mapRef.current.getCanvas().style.cursor = '';
-            };
 
             mapRef.current.addSource('points', {
                 type: 'geojson',
@@ -130,22 +140,15 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
             mapRef.current.on('mouseleave', 'circle', () => {
                 mapRef.current.getCanvas().style.cursor = '';
             });
+        }
 
-            // pois.forEach(poi => {
-            //     new mapboxgl.Marker()
-            //         .setLngLat([poi.lng, poi.lat])
-            //         .addTo(mapRef.current);
-            // });
+        mapRef.current.on('load', addCurrentLocationAndPoiMarkersOnMapLoad);
 
-            // const currentLocationMarker = new mapboxgl.Marker()
-            //     .setLngLat([startingCoords.lng, startingCoords.lat])
-            //     .addTo(mapRef.current);
-
-            // const markerElement = currentLocationMarker.getElement();
-            // if (markerElement) {
-            //     markerElement.style.background = 'red'; // Change color using CSS
-            // }
-        })
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.off('load', addCurrentLocationAndPoiMarkersOnMapLoad);
+            }
+        };
     }, [mapRef.current])
 }
 
@@ -169,10 +172,9 @@ function useRoutes(mapRef: any, { data }: MapVisualizationProps) {
             }
         }
 
-        // Add the route to the map
-        mapRef.current.on('load', async () => {
+        const addRouteOnMapLoad = async () => {
             if (mapRef.current.getLayer('route')) return;
-            
+
             mapRef.current.addLayer({
                 id: 'route',
                 type: 'line',
@@ -187,7 +189,16 @@ function useRoutes(mapRef: any, { data }: MapVisualizationProps) {
                     'line-opacity': 0.75
                 }
             });
-        });
+        }
+
+        // Add the route to the map
+        mapRef.current.on('load', addRouteOnMapLoad);
+
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.off('load', addRouteOnMapLoad);
+            }
+        };
     }, [mapRef.current])
 }
 
@@ -195,8 +206,8 @@ export function MapVisualization({ data }: MapVisualizationProps) {
     if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
 
     const { mapRef, mapContainerRef } = useMap({ data: data });
-    useMarkers(mapRef, { data: data });
     useRoutes(mapRef, { data: data });
+    useMarkers(mapRef, { data: data });
 
     return (
         <div
