@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
+import { MapVisualizationState } from '@/contexts/MapVisualization';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapVisualization.css';
-import { MapVisualizationState } from '@/contexts/MapVisualization/store/core/state';
 
 interface MapVisualizationProps {
     data: MapVisualizationState['data']
@@ -39,7 +39,7 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
             if (mapRef.current.getSource('points')) return;
 
             const navControl = new mapboxgl.NavigationControl();
-            mapRef.current.addControl(navControl, 'top-right'); // Adjust position as needed
+            mapRef.current.addControl(navControl, 'top-right');
 
             mapRef.current.addSource('startingCoords', {
                 type: 'geojson',
@@ -70,7 +70,7 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
             });
 
             const el = document.createElement('div');
-            el.className = 'pulsing-circle'
+            el.className = 'pulsing-circle';
             new mapboxgl.Marker(el)
                 .setLngLat([data.currentCoordinates.lng, data.currentCoordinates.lat])
                 .addTo(mapRef.current);

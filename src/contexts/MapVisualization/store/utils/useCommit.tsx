@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CommitContext } from "./StateProvider";
+import { CommitContext } from "./MapVisualizationStateProvider";
 
 import { MutationType, MutationPayloads } from '../core/mutations';
 

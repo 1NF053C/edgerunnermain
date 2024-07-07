@@ -1,7 +1,6 @@
 "use client";
 
-import { MapVisualization } from '@/contexts/MapVisualization/components/MapVisualizationContainer/v0/MapVisualization';
-import { useMapVisualizationState } from '@/contexts/MapVisualization/store';
+import { MapVisualization, useMapVisualizationState } from '@/contexts/MapVisualization';
 
 export function MapVisualizationContainer() {
     const { data, loading, error } = useMapVisualizationState();

@@ -1,15 +1,14 @@
 import styles from "./page.module.css";
-import { StateProvider } from '@/contexts/MapVisualization/store';
-import { MapVisualizationContainer } from "@/contexts/MapVisualization/components/MapVisualizationContainer/v0";
+import { MapVisualizationStateProvider, MapVisualizationContainer } from '@/contexts/MapVisualization';
 
 export default async function Home() {
   return (
-    <StateProvider>
+    <MapVisualizationStateProvider>
       <main className={styles.main}>
         <div className={styles.center}>
           <MapVisualizationContainer />
         </div>
       </main>
-    </StateProvider>
+    </MapVisualizationStateProvider>
   );
 }

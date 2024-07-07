@@ -1,7 +1,8 @@
 "use client";
+
 import { useContext, useEffect } from "react";
 import { LiveMap } from "../../models/LiveMap";
-import { StateContext } from "../utils/StateProvider";
+import { StateContext } from "../utils/MapVisualizationStateProvider";
 import { useData } from "./actions";
 
 export interface MapVisualizationState {
