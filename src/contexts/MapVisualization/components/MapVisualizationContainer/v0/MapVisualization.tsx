@@ -74,6 +74,20 @@ function useMarkers(mapRef: any, mapContainerRef: any, { data }: MapVisualizatio
                 .setLngLat([data.currentCoordinates.lng, data.currentCoordinates.lat])
                 .addTo(mapRef.current);
 
+            el.onclick = (e: any) => {
+                mapRef.current.flyTo({
+                    center: [data.currentCoordinates.lng, data.currentCoordinates.lat]
+                });
+            }
+
+            el.onmouseover = (e: any) => {
+                mapRef.current.getCanvas().style.cursor = 'pointer';
+            };
+
+            el.onmouseout = (e: any) => {
+                mapRef.current.getCanvas().style.cursor = '';
+            };
+
             mapRef.current.addSource('points', {
                 type: 'geojson',
                 data: {
