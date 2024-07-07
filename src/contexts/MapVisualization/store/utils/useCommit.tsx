@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { MutationPayloads, MutationType } from '../core/mutations';
 import { CommitContext } from "./StateProvider";
+
+import { MutationType, MutationPayloads } from '../core/mutations';
 
 export const useCommit = (): (<T extends MutationType>(mutation: T, payload: MutationPayloads[T]) => void) => {
     const context = useContext(CommitContext);

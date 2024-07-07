@@ -1,2 +1,2 @@
-export { useAppState } from './core/useAppState';
+export { useMapVisualizationState } from './core/state';
 export { useActions } from './core/actions';

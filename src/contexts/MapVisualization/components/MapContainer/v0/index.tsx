@@ -8,11 +8,12 @@ export function MapContainer() {
     if (!data || error) return <div>error</div>;
 
     return (
-        <Map
-            pois={[]}
-            startingCoords={data.currentCoordinates}
-            startingZoom={data.startingZoom}
-            mapboxGlAccessToken={data.publicToken}
-        />
+        <div>test</div>
+        // <Map
+        //     pois={[]}
+        //     startingCoords={data.currentCoordinates}
+        //     startingZoom={data.startingZoom}
+        //     mapboxGlAccessToken={data.publicToken}
+        // />
     );
 }
