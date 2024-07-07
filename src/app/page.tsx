@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { MapContainer } from "@/components/MapContainer/v0";
+import { MapContainer } from "@/contexts/MapVisualization/components/MapContainer/v0";
 
 export default async function Home() {
   return (
