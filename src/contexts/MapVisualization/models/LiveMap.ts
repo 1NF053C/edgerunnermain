@@ -1,6 +1,6 @@
-import { Coordinates } from "../../Shared/values/Coordinates";
-import { ZoomLevel } from "./values/ZoomLevel";
-import { PublicToken } from '@/contexts/MapVisualization/models/values/PublicToken';
+import { Coordinates } from "@/contexts/Shared"
+import { ZoomLevel } from "@/contexts/MapVisualization";
+import { PublicToken } from '@/contexts/MapVisualization';
 
 export interface LiveMap {
     id: string,
