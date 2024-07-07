@@ -10,7 +10,7 @@ interface MapVisualizationProps {
     data: MapVisualizationState['data']
 }
 
-export function MapVisualization({ data }: MapVisualizationProps) {
+function useMap({ data }: MapVisualizationProps) {
     if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
 
     const mapContainerRef = useRef<any>();
@@ -25,6 +25,12 @@ export function MapVisualization({ data }: MapVisualizationProps) {
             zoom: data.startingZoom
         });
     }, []);
+
+    return { mapContainerRef, mapRef }
+}
+
+function useMarkers(mapRef: any, mapContainerRef: any, { data }: MapVisualizationProps) {
+    if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
 
     useEffect(() => {
         if (!mapRef.current) return;
@@ -126,6 +132,13 @@ export function MapVisualization({ data }: MapVisualizationProps) {
             // }
         })
     }, [mapRef.current])
+}
+
+export function MapVisualization({ data }: MapVisualizationProps) {
+    if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
+
+    const { mapRef, mapContainerRef } = useMap({ data: data });
+    useMarkers(mapRef, mapContainerRef, { data: data })
 
     return (
         <div
