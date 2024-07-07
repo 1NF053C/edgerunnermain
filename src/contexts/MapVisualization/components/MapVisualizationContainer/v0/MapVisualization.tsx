@@ -1,35 +1,32 @@
 "use client";
-import { useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import './Map.css';
+import './MapVisualization.css';
+import { MapVisualizationState } from '@/contexts/MapVisualization/store/core/state';
 
-export interface MapProps {
-    startingCoords: {
-        lng: number,
-        lat: number
-    },
-    startingZoom: number,
-    mapboxGlAccessToken: string,
-    pois: any[]
+interface MapVisualizationProps {
+    data: MapVisualizationState['data']
 }
 
-export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }: MapProps) {
+export function MapVisualization({ data }: MapVisualizationProps) {
+    if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
+
     const mapContainerRef = useRef<any>();
     const mapRef = useRef<any>();
 
     useEffect(() => {
-        if (!mapRef.current) return; // temp
-        mapboxgl.accessToken = mapboxGlAccessToken;
+        if (mapRef.current) return;
+        mapboxgl.accessToken = data.publicToken;
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
-            center: [startingCoords.lng, startingCoords.lat],
-            zoom: startingZoom
+            center: [data.currentCoordinates.lng, data.currentCoordinates.lat],
+            zoom: data.startingZoom
         });
     }, []);
 
     useEffect(() => {
-        mapRef.current = null; // temp
         if (!mapRef.current) return;
         mapRef.current.on('load', function () {
             if (mapRef.current.getSource('points')) return;
@@ -46,9 +43,9 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
                         properties: {},
                         geometry: {
                             type: 'Point',
-                            coordinates: [startingCoords.lng, startingCoords.lat]
+                            coordinates: [data.currentCoordinates.lng, data.currentCoordinates.lat]
                         },
-                        id: String(startingCoords.lng) + String(startingCoords.lat)
+                        id: String(data.currentCoordinates.lng) + String(data.currentCoordinates.lat)
                     }]
                 }
             });
@@ -68,14 +65,14 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
             const el = document.createElement('div');
             el.className = 'pulsing-circle'
             new mapboxgl.Marker(el)
-                .setLngLat([startingCoords.lng, startingCoords.lat])
+                .setLngLat([data.currentCoordinates.lng, data.currentCoordinates.lat])
                 .addTo(mapRef.current);
 
             mapRef.current.addSource('points', {
                 type: 'geojson',
                 data: {
                     type: 'FeatureCollection',
-                    features: pois.map(poi => ({
+                    features: ([] as any[]).map(poi => ({
                         type: 'Feature',
                         properties: {},
                         geometry: {
@@ -127,9 +124,7 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
             // if (markerElement) {
             //     markerElement.style.background = 'red'; // Change color using CSS
             // }
-
         })
-
     }, [mapRef.current])
 
     return (
@@ -140,7 +135,3 @@ export function Map({ mapboxGlAccessToken, startingZoom, startingCoords, pois }:
         />
     );
 }
-function fetchSomeData() {
-    throw new Error('Function not implemented.');
-}
-

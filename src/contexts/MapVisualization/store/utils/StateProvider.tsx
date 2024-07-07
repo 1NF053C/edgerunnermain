@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useCallback } from 'react';
 import { State, initialState } from '../core/state';
 import { MutationPayloads, mutations, MutationType } from '../core/mutations';
 
@@ -21,11 +21,11 @@ export const StateProvider: React.FC<StateProviderProps> = ({ children }) => {
   const [state, setState] = useState<State>(initialState);
 
   // Commit function
-  const commit = (mutation: MutationType, payload: MutationPayloads[MutationType]) => {
-    console.log("[MUTATION]", mutation, "[PAYLOAD]", payload, "[NEW_STATE]", JSON.stringify(state, null, 2));
+  const commit = useCallback((mutation: MutationType, payload: MutationPayloads[MutationType]) => {
     setState((prevState) => mutations[mutation](prevState, payload as any));
-  };
-
+    console.log("[MUTATION]", mutation, "[PAYLOAD]", payload);
+  }, []);
+  
   return (
     <StateContext.Provider value={state}>
       <CommitContext.Provider value={commit}>

@@ -30,5 +30,6 @@ export const useData = () => {
             });
             commit('SET_LOADING', false);
         }
-    }, [locData, tokData, loading, error]);
+    }, [loading, error.length, locData, tokData]);
+
 };
