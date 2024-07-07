@@ -14,15 +14,51 @@ export function createMapBoxMappingService(): MappingService {
             const json = await query.json();
             const data = json.routes[0];
             const route = data.geometry.coordinates;
-            const geojson = {
-                type: 'Feature',
-                properties: {},
-                geometry: {
-                    type: 'LineString',
-                    coordinates: route
-                }
-            };
-            return geojson;
+            return route;
         }
     }
 }
+
+/*
+// example client side usage
+// const geojson = {
+//     type: 'Feature',
+//     properties: {},
+//     geometry: {
+//         type: 'LineString',
+//         coordinates: route // <----------- api response
+//     }
+// };
+// Add the route to the map
+map.on('load', async () => {
+    const routeData = await getRoute(start, end);
+
+    map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+            type: 'geojson',
+            data: routeData
+        },
+        layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+        }
+    });
+
+    // Fit the map to the route
+    const coordinates = routeData.geometry.coordinates;
+    const bounds = coordinates.reduce((bounds, coord) => {
+        return bounds.extend(coord);
+    }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+
+    map.fitBounds(bounds, {
+        padding: 50
+    });
+});
+*/
