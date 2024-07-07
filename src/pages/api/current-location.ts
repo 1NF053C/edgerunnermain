@@ -1,4 +1,4 @@
-import { createCurrentLocationService } from '@/services/CurrentLocationService/v0';
+import { createCurrentLocationService } from '@/server/services/CurrentLocationService/v0';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {

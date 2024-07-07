@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "core-js": "^3.37.1",
     "mapbox-gl": "^3.5.1",
     "next": "14.2.4",
     "react": "^18",
@@ -17,6 +19,7 @@
     "swr": "^2.1.0"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.55.11",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

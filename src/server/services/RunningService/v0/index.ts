@@ -1,15 +1,15 @@
-import { PointOfInterest } from "@/utils/PointOfInterest";
+import { PlaceOfInterest } from "@/contexts/Shared/models/PlaceOfInterest";
 import { createGoogleMapsRunningService } from "./drivers/GoogleMapsRunningService";
 
 export interface RunningService {
-    getRunningShoePois: () => Promise<PointOfInterest[]>,
+    getRunningShoePois: () => Promise<PlaceOfInterest[]>,
 }
 
-export function createRunningService(): RunningService {
+export async function createRunningService(): Promise<RunningService> {
     const RUNNING_SERVICE = process.env.RUNNING_SERVICE;
 
     if (RUNNING_SERVICE === 'google') {
-        return createGoogleMapsRunningService();
+        return (await createGoogleMapsRunningService())
     }
     else {
         throw TypeError("process.env.RUNNING_SERVICE is invalid")

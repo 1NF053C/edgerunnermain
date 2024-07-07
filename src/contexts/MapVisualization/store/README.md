@@ -9,6 +9,7 @@
 Design Principles:
 
 - discovering how to use this context's state, actions, and mutations should be simple
+- extending this context's state and then updating useData hook subsequently as needed should be simple
 - extending actions should be simple
 - extending committed mutations within an action should be simple
 - extendng mutation types should be simple

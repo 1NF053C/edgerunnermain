@@ -1,7 +1,4 @@
-export interface Coordinates {
-    lat: number;
-    lng: number;
-}
+import { Coordinates } from '@/contexts/Shared/values/Coordinates'
 
 export async function googleGeocode(): Promise<Coordinates> {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;

@@ -4,5 +4,5 @@ export interface Address {
         name: string,
         unit?: string
     },
-    formattedStreet: string
+    formatted: string
 }

@@ -1,9 +1,9 @@
-import { createRunningService } from '@/services/RunningService/v0';
+import { createRunningService } from '@/server/services/RunningService/v0';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
     try {
-        const runningService = createRunningService();
+        const runningService = await createRunningService();
         const results = await runningService.getRunningShoePois();
         res.status(200).json(results);
     } catch (error: any) {

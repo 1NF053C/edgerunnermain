@@ -1,4 +1,4 @@
-import { MappingService } from '@/services/MappingService/v0';
+import { MappingService } from '@/server/services/MappingService/v0';
 
 export function createMapBoxMappingService(): MappingService {
     const MAPBOX_API_KEY = process.env.MAPBOX_API_KEY;

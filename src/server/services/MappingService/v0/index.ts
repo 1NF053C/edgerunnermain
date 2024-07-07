@@ -1,5 +1,5 @@
 "use client";
-import { PointOfInterest } from '@/utils/PointOfInterest';
+import { PlaceOfInterest } from '@/utils/PlaceOfInterest';
 
 import { createGoogleMapsMappingService } from './drivers/GoogleMapsMappingService';
 import { createMapBoxMappingService } from './drivers/MapboxMappingService';
@@ -11,7 +11,7 @@ type id = string;
 export interface MappingService {
     placeMarker: (lng: number, lat: number) => id;
     removeMarker: (id: id) => void;
-    placeRoute: (a: PointOfInterest, b: PointOfInterest) => id;
+    placeRoute: (a: PlaceOfInterest, b: PlaceOfInterest) => id;
     removeRoute: (id: string) => void;
 }
 

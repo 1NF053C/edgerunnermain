@@ -4,4 +4,4 @@ export * from '@/contexts/MapVisualization/models';
 
 export { useMapVisualizationState } from '@/contexts/MapVisualization/store';
 export type { MapVisualizationState } from '@/contexts/MapVisualization/store';
-export { MapVisualizationStateProvider } from '@/contexts/MapVisualization/store/utils';
+export { MapVisualizationStateProvider, MapVisualizationStateContext } from '@/contexts/MapVisualization/store/utils';

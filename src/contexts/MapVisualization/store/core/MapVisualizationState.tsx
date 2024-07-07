@@ -1,8 +1,7 @@
 "use client";
 
-import { useContext, useEffect } from "react";
-import { LiveMap } from "../../models/LiveMap";
-import { StateContext } from "../utils/MapVisualizationStateProvider";
+import { useContext } from "react";
+import { LiveMap, MapVisualizationStateContext } from '@/contexts/MapVisualization'
 import { useData } from "./actions";
 
 export interface MapVisualizationState {
@@ -18,9 +17,9 @@ export const initialState: MapVisualizationState = {
 };
 
 export const useMapVisualizationState = (): MapVisualizationState => {
-    const context = useContext(StateContext);
+    const context = useContext(MapVisualizationStateContext);
     if (!context) {
-        throw new Error('useAppState must be used within a StateProvider');
+        throw new Error('useMapVisualizationState must be used within a MapVisualizationStateProvider');
     }
 
     useData();

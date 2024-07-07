@@ -1,4 +1,4 @@
-import { MappingService } from '@/services/MappingService/v0';
+import { MappingService } from '@/server/services/MappingService/v0';
 
 export function createGoogleMapsMappingService(): MappingService {
     const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;

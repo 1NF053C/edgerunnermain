@@ -1,11 +1,11 @@
 "use client";
 
 import React, { createContext, useState, ReactNode, useCallback } from 'react';
-import { MapVisualizationState, initialState } from '../core/state';
+import { MapVisualizationState, initialState } from '../core/MapVisualizationState';
 import { MutationPayloads, mutations, MutationType } from '../core/mutations';
 
 // Create contexts
-export const StateContext = createContext<MapVisualizationState | undefined>(undefined);
+export const MapVisualizationStateContext = createContext<MapVisualizationState | undefined>(undefined);
 export const CommitContext = createContext<((mutation: MutationType, payload: MutationPayloads[MutationType]) => void) | undefined>(undefined);
 
 // Provider component
@@ -27,10 +27,10 @@ export const MapVisualizationStateProvider: React.FC<MapVisualizationStateProvid
   }, []);
 
   return (
-    <StateContext.Provider value={state}>
+    <MapVisualizationStateContext.Provider value={state}>
       <CommitContext.Provider value={commit}>
         {children}
       </CommitContext.Provider>
-    </StateContext.Provider>
+    </MapVisualizationStateContext.Provider>
   );
 };

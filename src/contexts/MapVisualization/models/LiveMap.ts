@@ -1,4 +1,4 @@
-import { Coordinates } from "@/contexts/Shared"
+import { Coordinates, PlaceOfInterest } from "@/contexts/Shared"
 import { ZoomLevel } from "@/contexts/MapVisualization";
 import { PublicToken } from '@/contexts/MapVisualization';
 
@@ -6,5 +6,6 @@ export interface LiveMap {
     id: string,
     currentCoordinates: Coordinates,
     startingZoom: ZoomLevel,
-    publicToken: PublicToken
+    publicToken: PublicToken,
+    placesOfInterest: PlaceOfInterest[]
 }

@@ -93,14 +93,14 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
                 type: 'geojson',
                 data: {
                     type: 'FeatureCollection',
-                    features: ([] as any[]).map(poi => ({
+                    features: (data.placesOfInterest).map(poi => ({
                         type: 'Feature',
                         properties: {},
                         geometry: {
                             type: 'Point',
-                            coordinates: [poi.lng, poi.lat]
+                            coordinates: [poi.coordinates.lng, poi.coordinates.lat]
                         },
-                        id: String(poi.lng) + String(poi.lat)
+                        id: poi.id
                     }))
                 }
             });

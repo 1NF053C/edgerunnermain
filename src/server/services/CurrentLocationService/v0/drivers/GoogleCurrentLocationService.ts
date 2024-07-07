@@ -1,4 +1,4 @@
-import { CurrentLocationService } from '@/services/CurrentLocationService/v0';
+import { CurrentLocationService } from '@/server/services/CurrentLocationService/v0';
 import { googleGeocode } from '@/utils/googleGeocode';
 
 export function createGoogleMapsCurrentLocationService(): CurrentLocationService {

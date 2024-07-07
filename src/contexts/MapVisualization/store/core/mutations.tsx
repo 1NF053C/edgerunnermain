@@ -1,5 +1,5 @@
 import { Mutations } from '../utils/MapVisualizationStateProvider';
-import { MapVisualizationState } from './state';
+import { MapVisualizationState } from './MapVisualizationState';
 
 export type MutationType = 'SET_DATA' | 'SET_LOADING' | 'APPEND_ERROR'
 
