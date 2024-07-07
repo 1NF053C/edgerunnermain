@@ -149,11 +149,54 @@ function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
     }, [mapRef.current])
 }
 
+function useRoutes(mapRef: any, { data }: MapVisualizationProps) {
+    if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
+
+    useEffect(() => {
+        const geojson = {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: data.routeData.map(route => ({
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: route.geometry.coordinates
+                    },
+                    id: JSON.stringify(route.geometry.coordinates)
+                }))
+            }
+        }
+
+        // Add the route to the map
+        mapRef.current.on('load', async () => {
+            if (mapRef.current.getLayer('route')) return;
+            
+            mapRef.current.addLayer({
+                id: 'route',
+                type: 'line',
+                source: geojson,
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#3887be',
+                    'line-width': 5,
+                    'line-opacity': 0.75
+                }
+            });
+        });
+    }, [mapRef.current])
+}
+
 export function MapVisualization({ data }: MapVisualizationProps) {
     if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
 
     const { mapRef, mapContainerRef } = useMap({ data: data });
-    useMarkers(mapRef, { data: data })
+    useMarkers(mapRef, { data: data });
+    useRoutes(mapRef, { data: data });
 
     return (
         <div

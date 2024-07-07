@@ -7,5 +7,6 @@ export interface LiveMap {
     currentCoordinates: Coordinates,
     startingZoom: ZoomLevel,
     publicToken: PublicToken,
-    placesOfInterest: PlaceOfInterest[]
+    placesOfInterest: PlaceOfInterest[],
+    routeData: any[]
 }

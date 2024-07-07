@@ -1,20 +1,19 @@
 import { MappingService } from '@/server/services/MappingService/v0';
 
 export function createMapBoxMappingService(): MappingService {
-    const MAPBOX_API_KEY = process.env.MAPBOX_API_KEY;
-    if (!MAPBOX_API_KEY) {
-        throw TypeError("process.env.MAPBOX_API_KEY is missing");
+    const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_ACCESS_TOKEN;
+    if (!MAPBOX_ACCESS_TOKEN) {
+        throw TypeError("process.env.MAPBOX_ACCESS_TOKEN is missing");
     }
     return {
         async getRoute(start, end) {
             const query = await fetch(
-                `https://api.mapbox.com/directions/v5/mapbox/walking/${start.lat},${start.lng};${end.lat},${end.lng}?steps=true&geometries=geojson&access_token=${MAPBOX_API_KEY}`,
+                `https://api.mapbox.com/directions/v5/mapbox/walking/${start.lng},${start.lat};${end.lng},${end.lat}?steps=true&geometries=geojson&access_token=${MAPBOX_ACCESS_TOKEN}`,
                 { method: 'GET' }
             );
             const json = await query.json();
             const data = json.routes[0];
-            const route = data.geometry.coordinates;
-            return route;
+            return data;
         }
     }
 }
