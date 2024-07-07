@@ -5,7 +5,7 @@
   "scripts": {
     "loadenv": "node loadenv.js",
     "dev": "npm run loadenv && next dev",
-    "build": "next build",
+    "build": "npm run loadenv && next build",
     "start": "next start",
     "lint": "next lint"
   },

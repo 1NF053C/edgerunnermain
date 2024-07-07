@@ -1,5 +1,5 @@
+import { Coordinates } from '@/contexts/Shared';
 import { createGoogleMapsCurrentLocationService } from './drivers/GoogleCurrentLocationService'
-import { Coordinates } from '@/utils/googleGeocode';
 
 export interface CurrentLocationService {
     getCurrentLocation: () => Promise<Coordinates>;
