@@ -21,6 +21,7 @@ function useMap({ data }: MapVisualizationProps) {
         mapboxgl.accessToken = data.publicToken;
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
+            style: 'mapbox://styles/mapbox/dark-v11',
             center: [data.currentCoordinates.lng, data.currentCoordinates.lat],
             zoom: data.startingZoom
         });
