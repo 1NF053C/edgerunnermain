@@ -29,7 +29,7 @@ function useMap({ data }: MapVisualizationProps) {
     return { mapContainerRef, mapRef }
 }
 
-function useMarkers(mapRef: any, mapContainerRef: any, { data }: MapVisualizationProps) {
+function useMarkers(mapRef: any, { data }: MapVisualizationProps) {
     if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
 
     useEffect(() => {
@@ -152,7 +152,7 @@ export function MapVisualization({ data }: MapVisualizationProps) {
     if (!data) throw 'MapVisualization props.data has to be initialized to a nonnull value in its parent container.';
 
     const { mapRef, mapContainerRef } = useMap({ data: data });
-    useMarkers(mapRef, mapContainerRef, { data: data })
+    useMarkers(mapRef, { data: data })
 
     return (
         <div
