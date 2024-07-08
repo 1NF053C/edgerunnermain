@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient, Prisma } from '@prisma/client';
-import { MapboxPublicConfigService } from '@/pages/api/_services/factory/MapboxPublicConfigService';
+import { MapboxPublicConfigService } from '@/utils/DbClientFactory';
 
 const prisma = new PrismaClient()
 const mapboxPublicConfigService = new MapboxPublicConfigService(prisma)

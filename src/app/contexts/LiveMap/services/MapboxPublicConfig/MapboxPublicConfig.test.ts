@@ -1,15 +1,9 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-
-import { listMapboxPublicConfigs } from './queries/listMapboxPublicConfigs';
-import { getMapboxPublicConfig } from './queries/getMapboxPublicConfig';
-
-import { createMapboxPublicConfig } from './commands/createMapboxPublicConfig';
-import { updateMapboxPublicConfig } from './commands/updateMapboxPublicConfig';
-import { deleteMapboxPublicConfig } from './commands/deleteMapboxPublicConfig';
-
+import { MapboxPublicConfigService } from '@/utils/ApiClientFactory';
 import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
+const mapboxPublicConfigService = new MapboxPublicConfigService();
 
 describe('MapboxPublicConfig', () => {
     beforeAll(async () => {
@@ -21,7 +15,7 @@ describe('MapboxPublicConfig', () => {
     });
 
     it('should return an empty list when there is no config', async () => {
-        const configs = await listMapboxPublicConfigs();
+        const configs = await mapboxPublicConfigService.findAll();
         expect(configs).toEqual([]);
     });
 
@@ -31,7 +25,7 @@ describe('MapboxPublicConfig', () => {
             publickey: EXPECTED_STR
         }
 
-        const newConf = await createMapboxPublicConfig(mbPubConf);
+        const newConf = await mapboxPublicConfigService.create(mbPubConf);
         expect(newConf.publickey).toBe(EXPECTED_STR);
     });
 
@@ -44,23 +38,23 @@ describe('MapboxPublicConfig', () => {
         });
 
         for (const configInput of fakeConfigInputs) {
-            await createMapboxPublicConfig(configInput)
+            await mapboxPublicConfigService.create(configInput)
         }
 
-        const configs = await listMapboxPublicConfigs();
+        const configs = await mapboxPublicConfigService.findAll();
         expect(configs.length).toBe(6); // 5 new + 1 from previous test
     });
 
     it('should read a config', async () => {
-        const configs = await listMapboxPublicConfigs();
+        const configs = await mapboxPublicConfigService.findAll();
         const firstConfigId = configs[0].id;
 
-        const config = await getMapboxPublicConfig(firstConfigId);
+        const config = await mapboxPublicConfigService.findOne(firstConfigId);
         expect(config).toHaveProperty('id', firstConfigId);
     });
 
     it('should update a config', async () => {
-        const configs = await listMapboxPublicConfigs();
+        const configs = await mapboxPublicConfigService.findAll();
         const firstConfigId = configs[0].id;
 
         const EXPECTED_STR = faker.string.uuid();
@@ -68,17 +62,17 @@ describe('MapboxPublicConfig', () => {
             publickey: EXPECTED_STR
         }
 
-        const updatedConfig = await updateMapboxPublicConfig(firstConfigId, mbPubConf);
+        const updatedConfig = await mapboxPublicConfigService.update(firstConfigId, mbPubConf);
         expect(updatedConfig).toHaveProperty('id', EXPECTED_STR);
     });
 
     it('should delete a config', async () => {
-        const configs = await listMapboxPublicConfigs();
+        const configs = await mapboxPublicConfigService.findAll();
         const firstConfigId = configs[0].id;
 
-        await deleteMapboxPublicConfig(firstConfigId);
+        await mapboxPublicConfigService.delete(firstConfigId);
 
-        const latestConfigList = await listMapboxPublicConfigs();
+        const latestConfigList = await mapboxPublicConfigService.findAll();
         expect(latestConfigList.find(conf => conf.id === firstConfigId)).not.toBeDefined();
     });
 });

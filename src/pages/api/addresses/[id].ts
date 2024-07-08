@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient, Prisma } from '@prisma/client';
-import { AddressService } from '@/pages/api/_services/factory/AddressService';
+import { AddressService } from '@/utils/DbClientFactory';
 
 const prisma = new PrismaClient();
 const addressService = new AddressService(prisma);

@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { Assert } from 'ts-runtime-checks';
 
-export class CrudService<T, CreateInput, UpdateInput> {
+export class BaseDbClient<T, CreateInput, UpdateInput> {
   protected prisma: PrismaClient;
   protected model: any;
 
