@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { LiveMapboxMapProps } from "../components/LiveMapContainer";
+import { LiveMapboxMapProps } from "../components/LiveMapboxMapContainer";
 import mapboxgl from "mapbox-gl";
 
 export function useMapbox(props: LiveMapboxMapProps) {
