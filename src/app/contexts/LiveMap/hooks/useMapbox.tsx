@@ -6,10 +6,10 @@ export interface UseMapboxProps {
     publicKey: string,
     startLng: number,
     startLat: number,
-    startZoom: number
+    zoomLevel: number
 }
 
-export function useMapbox({ publicKey, startLng, startLat, startZoom }: UseMapboxProps) {
+export function useMapbox({ publicKey, startLng, startLat, zoomLevel }: UseMapboxProps) {
     const mapContainerRef = useRef<any>();
     const mapRef = useRef<any>();
 
@@ -20,7 +20,7 @@ export function useMapbox({ publicKey, startLng, startLat, startZoom }: UseMapbo
             container: mapContainerRef.current,
             style: 'mapbox://styles/mapbox/dark-v11',
             center: [startLng, startLat],
-            zoom: startZoom
+            zoom: zoomLevel
         });
 
         return () => {

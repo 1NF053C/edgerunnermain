@@ -18,7 +18,10 @@ CREATE TABLE "Address" (
 -- CreateTable
 CREATE TABLE "MapboxPublicConfig" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "publickey" TEXT NOT NULL
+    "publicKey" TEXT NOT NULL,
+    "startLng" REAL NOT NULL,
+    "startLat" REAL NOT NULL,
+    "zoomLevel" INTEGER NOT NULL
 );
 
 -- CreateIndex

@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { MapboxPublicConfigService } from '@/utils/ApiClientFactory';
 import { faker } from '@faker-js/faker';
+import { createFakeMapboxPublicConfigCreateInput, createFakeMapboxPublicConfigUpdateInput } from './createFakeMapboxPublicConfig';
 
 const prisma = new PrismaClient();
 const mapboxPublicConfigService = new MapboxPublicConfigService();
@@ -25,25 +26,16 @@ describe('MapboxPublicConfig', () => {
     });
 
     it('should create a new MapboxPublicConfig', async () => {
-        const EXPECTED_STR = faker.string.uuid();
-        const mbPubConf: Prisma.MapboxPublicConfigCreateInput = {
-            publickey: EXPECTED_STR
-        }
-
+        const mbPubConf = createFakeMapboxPublicConfigCreateInput();
         const newConf = await mapboxPublicConfigService.create(mbPubConf);
-        expect(newConf.publickey).toBe(EXPECTED_STR);
+        expect(newConf.publicKey).toBe(mbPubConf.publicKey);
     });
 
     it('should seed the collection with 5 fake configs', async () => {
-        const fakeConfigInputs = Array.from({ length: 5 }, () => {
-            const mbPubConf: Prisma.MapboxPublicConfigCreateInput = {
-                publickey: faker.string.uuid()
-            }
-            return mbPubConf;
-        });
+        const fakeConfigInputs = Array.from({ length: 5 }, createFakeMapboxPublicConfigCreateInput);
 
         for (const configInput of fakeConfigInputs) {
-            await mapboxPublicConfigService.create(configInput)
+            await mapboxPublicConfigService.create(configInput);
         }
 
         const configs = await mapboxPublicConfigService.findAll();
@@ -62,13 +54,11 @@ describe('MapboxPublicConfig', () => {
         const configs = await mapboxPublicConfigService.findAll();
         const firstConfigId = configs[0].id;
 
-        const EXPECTED_STR = faker.string.uuid();
-        const mbPubConf: Prisma.MapboxPublicConfigUpdateInput = {
-            publickey: EXPECTED_STR
-        }
+
+        const mbPubConf = createFakeMapboxPublicConfigUpdateInput();
 
         const updatedConfig = await mapboxPublicConfigService.update(firstConfigId, mbPubConf);
-        expect(updatedConfig).toHaveProperty('publickey', EXPECTED_STR);
+        expect(updatedConfig).toHaveProperty('publicKey', mbPubConf.publicKey);
     });
 
     it('should delete a config', async () => {

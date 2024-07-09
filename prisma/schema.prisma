@@ -31,5 +31,8 @@ model Address {
 
 model MapboxPublicConfig {
   id  Int @id @default(autoincrement())
-  publickey String
+  publicKey String
+  startLng Float
+  startLat Float
+  zoomLevel Int
 }
