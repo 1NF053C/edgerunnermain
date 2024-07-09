@@ -14,6 +14,11 @@ describe('MapboxPublicConfig', () => {
         await prisma.$disconnect();
     });
 
+    // See below for how to use api client services from ApiClientFactory
+    // Usage is coupled to types generated from prisma models
+    // Extend ApiClientFactory file to handle new models
+    // DbClientFactory produces similar functionality, difference being it depends on prisma.model methods rather than http client methods
+    // ApiClientFactory is for browserside, DbClientFactory is for serverside
     it('should return an empty list when there is no config', async () => {
         const configs = await mapboxPublicConfigService.findAll();
         expect(configs).toEqual([]);
@@ -63,7 +68,7 @@ describe('MapboxPublicConfig', () => {
         }
 
         const updatedConfig = await mapboxPublicConfigService.update(firstConfigId, mbPubConf);
-        expect(updatedConfig).toHaveProperty('id', EXPECTED_STR);
+        expect(updatedConfig).toHaveProperty('publickey', EXPECTED_STR);
     });
 
     it('should delete a config', async () => {

@@ -13,4 +13,3 @@ export class MapboxPublicConfigService extends BaseApiClient<MapboxPublicConfig,
     super(`${HOST_PORT}/api/mapbox-public-config`);
   }
 }
-
