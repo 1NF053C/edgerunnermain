@@ -1,5 +1,7 @@
-import { useMapbox } from "../../hooks/useMapbox";
-import { useMapboxNavigation } from "../../hooks/useMapboxNavigation";
+import { useMapbox } from "./hooks/useMapbox";
+import { useMapboxNavigation } from "./hooks/useMapboxNavigation";
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 export interface LiveMapboxMapProps {
     publicKey: string,
