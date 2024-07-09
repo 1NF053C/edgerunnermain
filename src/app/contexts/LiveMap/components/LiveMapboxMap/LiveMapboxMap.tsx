@@ -1,8 +1,7 @@
-import { useMapbox } from "./hooks/views/useMapbox";
-import { useMapboxNavigation } from "./hooks/views/useMapboxNavigation";
+import { useMapbox } from "./hooks/useMapbox";
+import { useMapboxNavigation } from "./hooks/useMapboxNavigation";
+import { useMapboxPulsingMarker } from "./hooks/useMapboxPulsingMarker";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useMapboxPulsingMarker } from "./hooks/views/useMapboxPulsingMarker";
-
 
 export interface LiveMapboxMapProps {
     publicKey: string,

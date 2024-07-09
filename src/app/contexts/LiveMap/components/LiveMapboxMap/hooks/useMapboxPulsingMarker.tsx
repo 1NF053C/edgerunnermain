@@ -2,8 +2,9 @@
 
 import { MutableRefObject, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-import { Coordinates } from "../data/Coordinates";
 import { v4 as uuidv4 } from 'uuid';
+import { Coordinates } from "../../../container-hooks/Coordinates";
+import './pulsing-marker.css'
 
 export function useMapboxPulsingMarker(mapRef: MutableRefObject<any>, coordinates: Coordinates) {
     useEffect(() => {
@@ -17,7 +18,11 @@ export function useMapboxPulsingMarker(mapRef: MutableRefObject<any>, coordinate
             addPulseEffect(mapRef, coordinates);
         }
         mapRef.current.on('load', renderPulsingMarker);
-        return () => mapRef.current.off('load', renderPulsingMarker);
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.off('load', renderPulsingMarker);
+            }
+        }
     }, [mapRef])
 }
 
@@ -89,4 +94,3 @@ function addPulseEffect(mapRef: MutableRefObject<any>, coordinates: Coordinates)
         .setLngLat([coordinates.lng, coordinates.lat])
         .addTo(mapRef.current);
 }
-

@@ -11,6 +11,10 @@ export function useMapboxNavigation(mapRef: MutableRefObject<any>) {
             mapRef.current.addControl(navControl, 'top-right');
         }
         mapRef.current.on('load', renderNavControls);
-        return () => mapRef.current.off('load', renderNavControls);
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.off('load', renderNavControls);
+            }
+        }
     }, [mapRef])
 }
