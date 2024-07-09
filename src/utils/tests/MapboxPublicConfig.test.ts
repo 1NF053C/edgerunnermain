@@ -1,6 +1,5 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { MapboxPublicConfigService } from '@/utils/ApiClientFactory';
-import { faker } from '@faker-js/faker';
 import { createFakeMapboxPublicConfigCreateInput, createFakeMapboxPublicConfigUpdateInput } from './createFakeMapboxPublicConfig';
 
 const prisma = new PrismaClient();
