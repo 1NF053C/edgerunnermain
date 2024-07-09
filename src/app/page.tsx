@@ -1,5 +1,5 @@
-import { LiveMapContainer } from "./contexts/LiveMap/components/LiveMapContainer";
+import { LiveMapboxMapContainer } from '@/app/contexts/LiveMap/components/LiveMapboxMapContainer';
 
 export default async function Home() {
-  return (<LiveMapContainer />);
+  return (<LiveMapboxMapContainer />);
 }
