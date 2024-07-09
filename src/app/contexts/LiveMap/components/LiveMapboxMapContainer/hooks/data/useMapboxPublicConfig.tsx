@@ -1,7 +1,7 @@
 "use client";
 
-import { MapboxPublicConfigService } from "@/utils/ApiClientFactory";
 import useSWR from "swr";
+import { MapboxPublicConfigService } from "@/utils/ApiClientFactory";
 
 export function useMapboxPublicConfig() {
     const mapboxPublicConfigService = new MapboxPublicConfigService();

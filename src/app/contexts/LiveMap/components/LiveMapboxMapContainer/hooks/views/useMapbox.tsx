@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { LiveMapboxMapProps } from "../components/LiveMapboxMapContainer";
 import mapboxgl from "mapbox-gl";
+import { LiveMapboxMapProps } from "../../LiveMapboxMap";
 
 export function useMapbox(props: LiveMapboxMapProps) {
     if (!props) throw 'useMapbox props has to be initialized to a nonnull value in its parent container.';

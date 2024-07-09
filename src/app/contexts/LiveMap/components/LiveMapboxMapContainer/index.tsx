@@ -1,7 +1,7 @@
 "use client";
 
 import { LiveMapboxMap } from "./LiveMapboxMap";
-import { useMapboxPublicConfig } from "./hooks/useMapboxPublicConfig";
+import { useMapboxPublicConfig } from "./hooks/data/useMapboxPublicConfig";
 
 export function LiveMapboxMapContainer() {
     const { data, error, isLoading } = useMapboxPublicConfig();

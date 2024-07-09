@@ -1,6 +1,7 @@
-import { useMapbox } from "./hooks/useMapbox";
-import { useMapboxNavigation } from "./hooks/useMapboxNavigation";
+import { useMapbox } from "./hooks/views/useMapbox";
+import { useMapboxNavigation } from "./hooks/views/useMapboxNavigation";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useMapboxPulsingMarker } from "./hooks/views/useMapboxPulsingMarker";
 
 
 export interface LiveMapboxMapProps {
@@ -15,6 +16,7 @@ export function LiveMapboxMap(props: LiveMapboxMapProps) {
 
     const { mapRef, mapContainerRef } = useMapbox(props);
     useMapboxNavigation(mapRef);
+    useMapboxPulsingMarker(mapRef, { lng: props.startLng, lat: props.startLat })
 
     return <div
         style={{ height: '100%', width: '100%' }}

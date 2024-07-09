@@ -25,7 +25,8 @@
     "react-dom": "^18",
     "swr": "^2.1.0",
     "ts-patch": "^3.2.1",
-    "ts-runtime-checks": "^0.6.0"
+    "ts-runtime-checks": "^0.6.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
@@ -35,6 +36,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/supertest": "^6.0.2",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
