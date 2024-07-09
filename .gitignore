@@ -4,6 +4,8 @@
 _archive
 *.db
 *.sqlite
+dist
+**/*/dist/
 
 prisma/generated/
 prisma/database

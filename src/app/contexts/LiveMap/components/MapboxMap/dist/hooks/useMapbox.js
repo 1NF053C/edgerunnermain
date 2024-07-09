@@ -1,17 +1,14 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
-import { LiveMapboxMapProps } from "../LiveMapboxMap";
-
-export function useMapbox(props: LiveMapboxMapProps) {
-    if (!props) throw 'useMapbox props has to be initialized to a nonnull value in its parent container.';
-
-    const mapContainerRef = useRef<any>();
-    const mapRef = useRef<any>();
-
-    useEffect(() => {
-        if (mapRef.current) return;
+export function useMapbox(props) {
+    if (!props)
+        throw 'useMapbox props has to be initialized to a nonnull value in its parent container.';
+    var mapContainerRef = useRef();
+    var mapRef = useRef();
+    useEffect(function () {
+        if (mapRef.current)
+            return;
         mapboxgl.accessToken = props.publicKey;
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
@@ -19,14 +16,12 @@ export function useMapbox(props: LiveMapboxMapProps) {
             center: [props.startLng, props.startLat],
             zoom: props.zoomLevel
         });
-
-        return () => {
+        return function () {
             if (mapRef.current) {
                 mapRef.current.remove();
                 mapRef.current = null;
             }
         };
     }, []);
-
-    return { mapContainerRef, mapRef }
+    return { mapContainerRef: mapContainerRef, mapRef: mapRef };
 }

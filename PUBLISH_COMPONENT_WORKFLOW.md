@@ -11,7 +11,7 @@ When extracting a single file from a larger React project to create a publishabl
    - Consider using peerDependencies for React and other core libraries.
 
 3. Create a New Project Structure:
-   my-component/
+   MapboxMap/
      src/
        MyComponent.tsx
        index.ts

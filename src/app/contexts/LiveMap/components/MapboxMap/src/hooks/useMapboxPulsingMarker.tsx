@@ -3,7 +3,7 @@
 import { MutableRefObject, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import { v4 as uuidv4 } from 'uuid';
-import { Coordinates } from "../../../container-hooks/Coordinates";
+import { Coordinates } from './Coordinates';
 import './pulsing-marker.css';
 
 export function useMapboxPulsingMarker(mapRef: MutableRefObject<any>, coordinates: Coordinates) {
