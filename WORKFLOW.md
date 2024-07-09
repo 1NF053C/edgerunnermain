@@ -8,20 +8,36 @@ Step 2:
 
 run
 
-`./prisma/scripts/clobber.sh`
+`npm run db:migrate`
 
 Step 3:
 
-create service factory for new model
+create database service factory for new model
 
 - ensure the three diamond bracket types align with the new model and not the model in the file you copy-pasted from
 
-`./pages/api/_services/factory`
-
 Step 4:
 
-create route and handler that calls appropriate service method in `./pages/api/new-model/*`
+create any seed files needed for dev and testing
 
 Step 5:
 
-test and create service commands and queries within relevant context folder such as `./src/contexts/LiveMap/services/**`;
+create route and handler that calls appropriate db client service method in `./pages/api/new-model/*`
+
+Step 6:
+
+create api client service factory
+
+- ensure three diamond bracket types align with new model and not the model in the file you copy-pasted from
+
+Step 7:
+
+create UI component container for your use case and relevant data hooks such as `useMapboxPublicConfig()`
+
+Step 8:
+
+create base UI component that depends on that container component's data
+
+Step 9 and on:
+
+create any relevant view hooks such as `useNavigationControls()` to extend your base view with more view features
