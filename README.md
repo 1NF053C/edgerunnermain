@@ -6,6 +6,8 @@ TODO:
 
 Implement v1 running service
 
+[ ] set up publish pipeline
+
 [ ] show pointer when mouse hovers marker
 
 [ ] render markers over routes (not under)
