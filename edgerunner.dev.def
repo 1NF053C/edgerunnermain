@@ -2,6 +2,7 @@ Bootstrap: docker
 From: node:18
 
 %post
+    apt-get update
     mkdir /app
     cd /app
 
@@ -13,3 +14,9 @@ From: node:18
 
 %runscript
     cd /app && npm install && npm run start
+
+## BUILD IMAGE CMD
+# apptainer build edgerunner.dev.sif edgerunner.dev.def
+
+## RUN CONTAINER CMD
+# apptainer run --bind ./:/app edgerunner.dev.sif
