@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: node:18
+
+%post
+    mkdir /app
+    cd /app
+
+%environment
+    export PATH=/app/node_modules/.bin:$PATH
+
+%startscript
+    cd /app && npm install && npm run dev
+
+%runscript
+    cd /app && npm install && npm run start

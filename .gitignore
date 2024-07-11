@@ -8,6 +8,10 @@ dist
 **/*/dist/
 tsconfig.tsbuildinfo
 **/*/tsconfig.tsbuildinfo
+ARCHITECTURE.md
+*.sif
+WORKFLOW.md
+docs/
 
 prisma/generated/
 prisma/database
