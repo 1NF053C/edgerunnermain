@@ -19,6 +19,10 @@ From: node:18
 %runscript
     cd /app && npm run start
 
+%test
+    cd /app
+    npm test
+
 %help
     This container includes a Node.js application. 
     To run the development server: apptainer run --app dev <container_name>
